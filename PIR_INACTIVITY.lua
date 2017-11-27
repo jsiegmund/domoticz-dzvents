@@ -50,19 +50,34 @@ return {
 		-- when the device has been switched; we need to correct the pirDisabled state because the user requested it
 		if (device ~= nil) then
 			domoticz.globalData.pirDisabled = device.state == 'Off'
-			if (domoticz.globalData.pirDisabled) then
-				domoticz.log('switched on pirDisabled because of PIR virtual switch toggle')
-			else
-				domoticz.log('switched off pirDisabled because of PIR virtual switch toggle')
-			end
+			domoticz.log('switched pirDisabled to ' .. tostring(domoticz.globalData.pirDisabled) .. ' because of PIR virtual switch toggle')
 		end
 		
 		-- when pirDisabled equals true, we're going to ignore the pir events
 		if (domoticz.globalData.pirDisabled == true) then
+			domoticz.log('Exiting PIR inactivity script because PIR is disabled.')
 		    return
 		end
+
+
+		local inactivityPeriod = 15
+		local Time = require('Time')
+		local lastActivationRaw = domoticz.globalData.eye01Activation.getLatest().data
+		local lastUpdate = eye01.lastUpdate
 		
-		if (eye01.state == 'Off' and eye01.lastUpdate.minutesAgo > 15 and (dim02.state ~= 'Off' or dim03.state ~= 'Off') ) then
+		if (lastActivationRaw ~= nil) then
+			local lastActivationTime = Time(lastActivationRaw)
+			local currentTime = Time()
+			local minutesActivated = lastActivationTime.compare(lastUpdate)
+			if (minutesActivated.mins < 15) then
+				inactivityPeriod = minutesActivated.mins
+			end
+		end
+
+		local timeLastUpdate = lastUpdate.minutesAgo
+		local tmpBool = lastUpdate.minutesAgo >= inactivityPeriod
+	
+		if (eye01.state == 'Off' and lastUpdate.minutesAgo >= inactivityPeriod and (dim02.state ~= 'Off' or dim03.state ~= 'Off') ) then
 			dim02.switchOff()
 			dim03.switchOff()
 			domoticz.log('Switched off bedroom lights because of PIR inactivity')

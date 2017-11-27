@@ -3,14 +3,14 @@
 return {
 
 	-- 'active' controls if this entire script is considered or not
-	active = true, -- set to false to disable this script
+	active = false, -- set to false to disable this script
 
 	-- trigger
 	-- can be a combination:
 	on = {
-		devices = {
-			-- scripts is executed if the device that was updated matches with one of these triggers
-			15 -- EYE01 (Hal)
+		timer = {
+			-- timer triggers.. if one matches with the current time then the script is executed
+			'every minute'
 		}
 	},
 
@@ -32,15 +32,14 @@ return {
 		
 		--domoticz.log('pir disabled = ' .. domoticz.globalData.pirDisabled)
 		
-		if (device.state == 'On' and domoticz.devices(139).state == 'On' and domoticz.devices(1).state == 'Off' and domoticz.devices(57).state == 'Off') then
-		    domoticz.scenes('Licht aan').switchOn()
-		    domoticz.log('Switched on "Licht aan" as EYE01 detected motion at night time.')
+		domoticz.devices('WDW01').switchOff()
+		domoticz.devices('WDW02').switchOff()
+		domoticz.devices('WDW03').switchOff()
 
-			-- this should go INSIDE the if loop
-			local Time = require('Time')
-			local currentTime = Time().raw
-			domoticz.log('storing the activation time in global: ' .. tostring(currentTime))
-			domoticz.globalData.eye01Activation.add(currentTime)
-		end
+		domoticz.devices('PIR01').switchOff()
+		domoticz.devices('PIR02').switchOff()
+		domoticz.devices('PIR03').switchOff()
+		domoticz.devices('PIR04').switchOff()
+
 	end
 }

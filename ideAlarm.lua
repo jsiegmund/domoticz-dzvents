@@ -3,13 +3,9 @@ ideAlarm.lua
 
 Please read: https://github.com/allan-gam/ideAlarm/wiki
 
-Note that any changes to this file will be lost when upgrading.
+Do not change anything in this file.
 --]]
 
-if not string.match(package.path, 'modules') then
-	package.path = globalvariables['script_path']..'modules/?.lua;'..package.path
-	--print(package.path)
-end
 local alarm = require "ideAlarmModule"
 
 local triggerDevices = alarm.triggerDevices()
@@ -23,7 +19,7 @@ end
 return {
 	active = true,
 	logging = {
-		level = domoticz.LOG_INFO, -- Select one of LOG_DEBUG, LOG_INFO, LOG_ERROR, LOG_FORCE to override system log level
+		level = alarm.loggingLevel(domoticz), -- Can be set in the configuration file
 		marker = alarm.version()
 	},
 	on = {
