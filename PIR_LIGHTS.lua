@@ -3,14 +3,14 @@
 return {
 
 	-- 'active' controls if this entire script is considered or not
-	active = false, -- set to false to disable this script
+	active = true, -- set to false to disable this script
 
 	-- trigger
 	-- can be a combination:
 	on = {
 		devices = {
 			-- scripts is executed if the device that was updated matches with one of these triggers
-			15 -- EYE01 (Hal)
+			158 -- EYE01 (Hal)
 		}
 	},
 
@@ -32,15 +32,10 @@ return {
 		
 		--domoticz.log('pir disabled = ' .. domoticz.globalData.pirDisabled)
 		
-		if (device.state == 'On' and domoticz.devices(139).state == 'On' and domoticz.devices(1).state == 'Off' and domoticz.devices(57).state == 'Off') then
-		    domoticz.scenes('Licht aan').switchOn()
-		    domoticz.log('Switched on "Licht aan" as EYE01 detected motion at night time.')
-
-			-- this should go INSIDE the if loop
-			local Time = require('Time')
-			local currentTime = Time().raw
-			domoticz.log('storing the activation time in global: ' .. tostring(currentTime))
-			domoticz.globalData.eye01Activation.add(currentTime)
-		end
+		local pirEnabled = domoticz.devices(158)
+		
+		-- when the device has been switched; we need to correct the pirDisabled state because the user requested it
+		domoticz.globalData.pirDisabled = device.state == 'Off'
+		domoticz.log('switched pirDisabled to ' .. tostring(domoticz.globalData.pirDisabled) .. ' because of PIR virtual switch toggle')
 	end
 }
