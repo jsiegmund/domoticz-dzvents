@@ -6,6 +6,9 @@ return {
         pirDisabledKitchen = { initial = false },
         pirDisabledHallway = { initial = false },
         pirDisabledFirstFloor = { initial = false },
-        eye01Activation = { history = true, maxItems = 2 }
+        pir01Activation = { history = true, maxItems = 2 },
+        pir02Activation = { history = true, maxItems = 2 },
+        pir03Activation = { history = true, maxItems = 2 },
+        pir04Activation = { history = true, maxItems = 2 }
     }
 }

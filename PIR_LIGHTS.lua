@@ -3,7 +3,7 @@
 return {
 
 	-- 'active' controls if this entire script is considered or not
-	active = true, -- set to false to disable this script
+	active = false, -- set to false to disable this script
 
 	-- trigger
 	-- can be a combination:

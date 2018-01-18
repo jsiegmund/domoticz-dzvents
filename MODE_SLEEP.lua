@@ -34,16 +34,14 @@ return {
 		
 		local switchSleepMode = domoticz.devices(138)
 		
-		local dim02 = domoticz.devices(1)
-		local dim03 = domoticz.devices(57)
+		if (device == nil) then
+        	domoticz.log('Reset PIR disabled to false at midnight.')
+			domoticz.globalData.pirDisabled = false
+		end
 		
-		local lightsOn = (dim02.state == 'On') or (dim03.state =='On')
-		
-        if (device == nil and switchSleepMode.state == 'Off' and lightsOn == false) then 
-            switchSleepMode.switchOn()   
-            domoticz.log('Automatically switched to sleep mode at 00:00')
-		elseif (device.state == 'On') then
-			domoticz.groups('ALL LIGHTS').switchOff()
+        if (device == nil and switchSleepMode.state == 'Off') then 
+			switchSleepMode.switchOn()   
+            domoticz.log('Automatically switched to sleep mode at 00:00.')
 		end
 	end
 }
