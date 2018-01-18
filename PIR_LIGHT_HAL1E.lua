@@ -13,7 +13,7 @@ return {
 			'every minute'
 		},
 		devices = {
-		    45, 158
+		    45
 		}
 	},
 
@@ -47,10 +47,8 @@ return {
 		local pirEnabled = domoticz.devices(158)
 		local dim04 = domoticz.devices(71)
 		
-		-- when the device has been switched; we need to correct the pirDisabled state because the user requested it
-		if (device ~= nil and device.id == pirEnabled.id) then
-			domoticz.globalData.pirDisabled = device.state == 'Off'
-			domoticz.log('switched pirDisabled to ' .. tostring(domoticz.globalData.pirDisabled) .. ' because of PIR virtual switch toggle')
+		if (domoticz.globalData.pirDisabled) then
+			return
 		end
 
 		-- when the script was triggered by the pir sensor, we need to check whether the light should be activated
