@@ -45,7 +45,7 @@ _C.ALARM_ZONES = {
 		statusTextDevID=154,
 		entryDelay=15,
 		exitDelay=20,
-		alertDevices={ 'SRN02', 'DIM08 (Hal beneden)'}, --'SRN01',
+		alertDevices={'SRN01', 'SRN02', 'DIM08'},
 		sensors = {
 			['PIR01'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
 			['PIR02'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
