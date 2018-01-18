@@ -17,7 +17,7 @@ DO NOT ALTER ANYTHING ABOVE THIS LINE
 -------------------------------------------------------------------------------
 --]]
 
-_C.ALARM_TEST_MODE = false -- if ALARM_TEST_MODE is set to true it will prevent audible alarm
+_C.ALARM_TEST_MODE = true -- if ALARM_TEST_MODE is set to true it will prevent audible alarm
 
 -- Interval for how often we shall trigger the script to check if nagging about open doors needs to be made 
 _C.NAG_SCRIPT_TRIGGER_INTERVAL = {'every other minute'} -- Format as defined by dzVents timers
@@ -47,9 +47,10 @@ _C.ALARM_ZONES = {
 		exitDelay=20,
 		alertDevices={'SRN01', 'SRN02'},
 		sensors = {
-			['PIR01'] = {['class'] = SENSOR_CLASS_A, ['nag'] = true, ['nagTimeoutMins'] = 5, ['armWarn'] = true, ['enabled'] = true},
-			['PIR02'] = {['class'] = SENSOR_CLASS_A, ['nag'] = true, ['nagTimeoutMins'] = 5, ['armWarn'] = true, ['enabled'] = true},
-			['PIR03'] = {['class'] = SENSOR_CLASS_A, ['nag'] = true, ['nagTimeoutMins'] = 5, ['armWarn'] = true, ['enabled'] = true},
+			['PIR01'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
+			['PIR02'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
+			['PIR03'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
+			['PIR04'] = {['class'] = SENSOR_CLASS_B, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
 			['WDW01'] = {['class'] = SENSOR_CLASS_A, ['nag'] = true, ['nagTimeoutMins'] = 5, ['armWarn'] = true, ['enabled'] = true},
 			['WDW02'] = {['class'] = SENSOR_CLASS_A, ['nag'] = true, ['nagTimeoutMins'] = 5, ['armWarn'] = true, ['enabled'] = true},
 			['WDW03'] = {['class'] = SENSOR_CLASS_A, ['nag'] = true, ['nagTimeoutMins'] = 5, ['armWarn'] = true, ['enabled'] = true},
