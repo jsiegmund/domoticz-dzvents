@@ -27,7 +27,7 @@ _C.NAG_INTERVAL_MINUTES = 6
 -- Number of seconds which after the alert devices will be turned off
 -- automatically even if an active alert situation still exists.
 -- 0 = Disable automatic turning off alert devices.   
-_C.ALARM_ALERT_MAX_SECONDS = 15
+_C.ALARM_ALERT_MAX_SECONDS = 30
 
 --	Uncomment 3 lines below to override the default logging level
 --	_C.loggingLevel = function(domoticz)
@@ -45,7 +45,7 @@ _C.ALARM_ZONES = {
 		statusTextDevID=154,
 		entryDelay=15,
 		exitDelay=20,
-		alertDevices={'SRN01', 'SRN02', 'DIM08 (Hal beneden)'},
+		alertDevices={ 'SRN02', 'DIM08 (Hal beneden)'}, --'SRN01',
 		sensors = {
 			['PIR01'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
 			['PIR02'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
