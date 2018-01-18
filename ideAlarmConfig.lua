@@ -17,7 +17,7 @@ DO NOT ALTER ANYTHING ABOVE THIS LINE
 -------------------------------------------------------------------------------
 --]]
 
-_C.ALARM_TEST_MODE = true -- if ALARM_TEST_MODE is set to true it will prevent audible alarm
+_C.ALARM_TEST_MODE = false -- if ALARM_TEST_MODE is set to true it will prevent audible alarm
 
 -- Interval for how often we shall trigger the script to check if nagging about open doors needs to be made 
 _C.NAG_SCRIPT_TRIGGER_INTERVAL = {'every other minute'} -- Format as defined by dzVents timers
@@ -45,7 +45,7 @@ _C.ALARM_ZONES = {
 		statusTextDevID=154,
 		entryDelay=15,
 		exitDelay=20,
-		alertDevices={'SRN01', 'SRN02'},
+		alertDevices={'SRN01', 'SRN02', 'DIM08 (Hal beneden)'},
 		sensors = {
 			['PIR01'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
 			['PIR02'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},
