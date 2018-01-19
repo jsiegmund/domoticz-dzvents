@@ -40,8 +40,8 @@ return {
 		end
 
 		local switchSleepMode = domoticz.devices(138)
-        local switchNightMode = domoticz.devices(139)
-        local switchDayMode = domoticz.devices(140)
+        	local switchNightMode = domoticz.devices(139)
+        	local switchDayMode = domoticz.devices(140)
 		
 		local pir04 = domoticz.devices(45)
 		local pirEnabled = domoticz.devices(158)
