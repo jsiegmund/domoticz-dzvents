@@ -13,7 +13,7 @@ return {
 			'every minute'
 		},
 		devices = {
-		    15, 60, 158
+		    15, 60
 		}
 	},
 
@@ -40,18 +40,15 @@ return {
 		end
 
 		local switchSleepMode = domoticz.devices(138)
-        local switchNightMode = domoticz.devices(139)
-        local switchDayMode = domoticz.devices(140)
+        	local switchNightMode = domoticz.devices(139)
+        	local switchDayMode = domoticz.devices(140)
 		
 		local pir01 = domoticz.devices(15)
 		local wdw01 = domoticz.devices(60)
-		local pirEnabled = domoticz.devices(158)
 		local dim08 = domoticz.devices(219)
 		
-		-- when the device has been switched; we need to correct the pirDisabled state because the user requested it
-		if (device ~= nil and device.id == pirEnabled.id) then
-			domoticz.globalData.pirDisabled = device.state == 'Off'
-			domoticz.log('switched pirDisabled to ' .. tostring(domoticz.globalData.pirDisabled) .. ' because of PIR virtual switch toggle')
+		if (domoticz.globalData.pirDisabled) then
+			return
 		end
 
 		-- when the script was triggered by the pir sensor, we need to check whether the light should be activated
@@ -59,15 +56,15 @@ return {
 			local level = 0
 			
 			if (switchSleepMode.state == "On") then
-				level = 20
+				level = 35
 			elseif (switchNightMode.state == "On") then
-				level = 50
+				level = 60
 			elseif (switchDayMode.state == "On") then
 				return
 			end
 
 			dim08.dimTo(level)			
-		    domoticz.log('Switched on lights in downstairs hallway as EYE01 detected motion at night time.')
+		    	domoticz.log('Switched on lights in downstairs hallway as EYE01 detected motion at night time.')
 
 			-- this should go INSIDE the if loop
 			local Time = require('Time')
