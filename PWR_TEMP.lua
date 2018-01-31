@@ -11,7 +11,7 @@ return {
 		devices = {
 			-- scripts is executed if the device that was updated matches with one of these triggers
 			115,        -- PWR01
-			144         -- PWR02
+			297         -- PWR02
 		}
 	},
 
@@ -35,7 +35,7 @@ return {
 		
 		if (device.state == 'On') then
 			device.switchOff().afterMin(90)
-			domoticz.log('Power switch ' .. device.name .. ' has been set to switch off after 120 minutes.')
+			domoticz.log('Power switch ' .. device.name .. ' has been set to switch off after 90 minutes.')
 		end
 	end
 }
