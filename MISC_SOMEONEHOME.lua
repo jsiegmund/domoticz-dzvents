@@ -28,13 +28,7 @@ return {
 
 		The device object is the device that was triggered due to the device in the 'on' section above.
 		
-		-- 138 = VIRT03 sleep mode
-        -- 139 = VIRT04 night mode
-        -- 140 = VIRT05 day mode
-        
 		]] --
-
-
 
 		local phone1 = domoticz.devices(96)     -- phone 1 signal
 		local phone2 = domoticz.devices(97)     -- phone 2 signal
@@ -47,7 +41,7 @@ return {
 		-- when the switch is on but there's no phone on; toggle the switch
 		elseif (switch.state == 'On' and (phone1.state == 'Off' and phone2.state == 'Off')) then
 			domoticz.log('Toggling the "someone home" switch to OFF due to status toggle of device ' .. device.id)
-			switch.switchOn()
+			switch.switchOff()
 		end
 
 	end
