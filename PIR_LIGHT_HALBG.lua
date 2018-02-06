@@ -56,15 +56,15 @@ return {
 			local level = 0
 			
 			if (switchSleepMode.state == "On") then
-				level = 35
+				level = 20
 			elseif (switchNightMode.state == "On") then
-				level = 60
+				level = 40
 			elseif (switchDayMode.state == "On") then
 				return
 			end
 
 			dim08.dimTo(level)			
-		    	domoticz.log('Switched on lights in downstairs hallway as EYE01 detected motion at night time.')
+		    domoticz.log('Switched on lights in downstairs hallway as EYE01 detected motion at night time.')
 
 			-- this should go INSIDE the if loop
 			local Time = require('Time')

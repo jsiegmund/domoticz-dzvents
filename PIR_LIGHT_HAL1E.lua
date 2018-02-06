@@ -57,9 +57,9 @@ return {
 			local level = 0
 
 			if (switchSleepMode.state == "On") then
-				level = 35
+				level = 20
 			elseif (switchNightMode.state == "On") then
-				level = 60
+				level = 40
 			elseif (switchDayMode.state == "On") then
 				return
 			end
