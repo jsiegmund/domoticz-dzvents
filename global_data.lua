@@ -9,7 +9,7 @@ return {
     
                 if (timeSinceLastMovement.mins >= inactivityPeriod) then
                     dimmer.switchOff()
-                    domoticz.log('Switched off ' .. dimmer.name .. ' because of long period of inactivity on ' .. pir.name)
+                    domoticz.log('Switched off ' .. dimmer.name .. ' because of long period of inactivity ( ' .. timeSinceLastMovement.mins .. ' ) on ' .. pir.name)
                 end
             end
         end,
