@@ -35,8 +35,10 @@ return {
 		local switchSleepMode = domoticz.devices(138)
 		
 		if (device == nil) then
-        	domoticz.log('Reset PIR disabled to false at midnight.')
-			domoticz.globalData.pirDisabled = false
+			domoticz.log('Reset PIR disabled to false at midnight.')
+			
+			domoticz.globalData.pirDisabled = false	    -- switch off pirDisabled
+			domoticz.devices(158).switchOn()			-- switch ON VIRT07 (PIR)
 		end
 		
         if (device == nil and switchSleepMode.state == 'Off') then 

@@ -13,7 +13,7 @@ return {
 			'every minute'
 		},
 		devices = {
-		    15, 60
+			15, 60
 		}
 	},
 
@@ -40,8 +40,8 @@ return {
 		end
 
 		local switchSleepMode = domoticz.devices(138)
-        	local switchNightMode = domoticz.devices(139)
-        	local switchDayMode = domoticz.devices(140)
+        local switchNightMode = domoticz.devices(139)
+        local switchDayMode = domoticz.devices(140)
 		
 		local pir01 = domoticz.devices(15)
 		local wdw01 = domoticz.devices(60)
