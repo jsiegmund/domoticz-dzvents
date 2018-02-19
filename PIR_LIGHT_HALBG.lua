@@ -33,10 +33,9 @@ return {
 		]] --
 		-- example
 		
-		if (domoticz ~= nil and domoticz.globalData ~= nil and domoticz.globalData.pirDisabled ~= nil) then
-	        domoticz.log('PIR script with pirDisabled = ' .. tostring(domoticz.globalData.pirDisabled))
-	    else
-	        domoticz.log('PIR script with pirDisabled nil')
+		if (domoticz.globalData.pirDisabled) then
+			domoticz.log('Exiting PIR inactivity script because PIR is disabled.')
+			return
 		end
 
 		local switchSleepMode = domoticz.devices(138)
@@ -45,11 +44,7 @@ return {
 		
 		local pir01 = domoticz.devices(15)
 		local wdw01 = domoticz.devices(60)
-		local dim08 = domoticz.devices(219)
-		
-		if (domoticz.globalData.pirDisabled) then
-			return
-		end
+		local dim08 = domoticz.devices(219)		
 
 		-- when the script was triggered by the pir sensor, we need to check whether the light should be activated
 		if (device ~= nil and (device.id == pir01.id or device.id == wdw01.id)) then
@@ -74,12 +69,6 @@ return {
 
 			return
 		end
-		
-		-- when pirDisabled equals true, we're going to ignore the pir events
-		if (domoticz.globalData.pirDisabled == true) then
-			domoticz.log('Exiting PIR inactivity script because PIR is disabled.')
-		    return
-		end
 
 		local inactivityPeriod = 15
 		local Time = require('Time')
@@ -100,7 +89,7 @@ return {
 		local timeLastUpdate = lastUpdate.minutesAgo
 		local tmpBool = lastUpdate.minutesAgo >= inactivityPeriod
 	
-		if (pir01.state == 'Off' and lastUpdate.minutesAgo >= inactivityPeriod and dim08.state ~= 'Off') then
+		if (pir01.state == 'Off' and lastUpdate.minutesAgo > inactivityPeriod and dim08.state ~= 'Off') then
 			dim08.switchOff()
 			domoticz.log('Switched off hallway lights downstairs because of PIR inactivity')
 		end

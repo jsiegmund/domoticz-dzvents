@@ -32,25 +32,20 @@ return {
 		The device object is the device that was triggered due to the device in the 'on' section above.
 		]] --
 		-- example
-		
-		if (domoticz ~= nil and domoticz.globalData ~= nil and domoticz.globalData.pirDisabled ~= nil) then
-	        domoticz.log('PIR script with pirDisabled = ' .. tostring(domoticz.globalData.pirDisabled))
-	    else
-	        domoticz.log('PIR script with pirDisabled nil')
+
+		if (domoticz.globalData.pirDisabled) then
+			domoticz.log('Exiting PIR inactivity script because PIR is disabled.')
+			return
 		end
 
 		local switchSleepMode = domoticz.devices(138)
-        	local switchNightMode = domoticz.devices(139)
-        	local switchDayMode = domoticz.devices(140)
+        local switchNightMode = domoticz.devices(139)
+        local switchDayMode = domoticz.devices(140)
 		
 		local pir04 = domoticz.devices(45)
 		local pirEnabled = domoticz.devices(158)
 		local dim04 = domoticz.devices(71)
 		
-		if (domoticz.globalData.pirDisabled) then
-			return
-		end
-
 		-- when the script was triggered by the pir sensor, we need to check whether the light should be activated
 		if (device ~= nil and device.id == pir04.id) then
 
@@ -76,12 +71,6 @@ return {
 			return
 		end
 		
-		-- when pirDisabled equals true, we're going to ignore the pir events
-		if (domoticz.globalData.pirDisabled == true) then
-			domoticz.log('Exiting PIR inactivity script because PIR is disabled.')
-		    return
-		end
-
 		local inactivityPeriod = 15
 		local Time = require('Time')
 		local lastActivationRaw = domoticz.globalData.pir04Activation.getLatest().data
@@ -101,7 +90,7 @@ return {
 		local timeLastUpdate = lastUpdate.minutesAgo
 		local tmpBool = lastUpdate.minutesAgo >= inactivityPeriod
 	
-		if (pir04.state == 'Off' and lastUpdate.minutesAgo >= inactivityPeriod and dim04.state ~= 'Off') then
+		if (pir04.state == 'Off' and lastUpdate.minutesAgo > inactivityPeriod and dim04.state ~= 'Off') then
 			dim04.switchOff()
 			domoticz.log('Switched off hallway light first floor because of PIR inactivity')
 		end
