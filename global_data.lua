@@ -1,6 +1,6 @@
 return {
     helpers = {
-        switchOffAfterInactivity = function(dimmer, pir, inactivityPeriod) 
+        switchOffAfterInactivity = function(domoticz, dimmer, pir, inactivityPeriod) 
             if (dimmer.state == 'On' and pir.state == 'Off') then
                 local Time = require('Time')
                 local currentTime = Time()

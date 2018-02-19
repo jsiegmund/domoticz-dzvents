@@ -45,14 +45,14 @@ return {
 
 		-- Dimmers in the living room react to PIR02 inactivity
 		local dim01 = domoticz.devices(domoticz.helpers.STATIC_DIM01)
-		domoticz.helpers.switchOffAfterInactivity(dim01, pir02, inactivityPeriod)
+		domoticz.helpers.switchOffAfterInactivity(domoticz, dim01, pir02, inactivityPeriod)
 
 		-- Dimmers in the back of the house react to PIR03 inactivity 
 		local dim02 = domoticz.devices(domoticz.helpers.STATIC_DIM06)
-		domoticz.helpers.switchOffAfterInactivity(dim02, pir03, inactivityPeriod)
+		domoticz.helpers.switchOffAfterInactivity(domoticz, dim02, pir03, inactivityPeriod)
 		local dim06 = domoticz.devices(domoticz.helpers.STATIC_DIM06)
-		domoticz.helpers.switchOffAfterInactivity(dim06, pir03, inactivityPeriod)
+		domoticz.helpers.switchOffAfterInactivity(domoticz, dim06, pir03, inactivityPeriod)
 		local dim07 = domoticz.devices(domoticz.helpers.STATIC_DIM07)
-		domoticz.helpers.switchOffAfterInactivity(dim07, pir03, inactivityPeriod)
+		domoticz.helpers.switchOffAfterInactivity(domoticz, dim07, pir03, inactivityPeriod)
 	end
 }
