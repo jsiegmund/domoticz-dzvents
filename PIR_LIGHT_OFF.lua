@@ -10,7 +10,7 @@ return {
 	on = {
 		timer = {
 			-- timer triggers.. if one matches with the current time then the script is executed
-			'every minute'
+			'every 5 minutes'
 		}
 	},
 
