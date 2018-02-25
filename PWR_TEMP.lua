@@ -11,7 +11,7 @@ return {
 		devices = {
 			-- scripts is executed if the device that was updated matches with one of these triggers
 			115,        -- PWR01
-			297         -- PWR02
+			328         -- PWR02
 		}
 	},
 
@@ -32,10 +32,12 @@ return {
 		-- example
 		
 		domoticz.log('Power switch ' .. device.name .. ' toggled to state:' .. device.state)
+
+		local delayMins = 90
 		
 		if (device.state == 'On') then
-			device.switchOff().afterMin(90)
-			domoticz.log('Power switch ' .. device.name .. ' has been set to switch off after 90 minutes.')
+			device.switchOff().afterMin(delayMins)
+			domoticz.log('Power switch ' .. device.name .. ' has been set to switch off after ' .. tostring(delayMins) .. ' minutes.')
 		end
 	end
 }

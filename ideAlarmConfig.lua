@@ -43,8 +43,8 @@ _C.ALARM_ZONES = {
 		name='Peellandhof',
 		armingModeTextDevID=153,
 		statusTextDevID=154,
-		entryDelay=15,
-		exitDelay=20,
+		entryDelay=30,
+		exitDelay=30,
 		alertDevices={124,127},
 		sensors = {
 			['PIR01'] = {['class'] = SENSOR_CLASS_A, ['nag'] = false, ['nagTimeoutMins'] = 5, ['armWarn'] = false, ['enabled'] = true},

@@ -8,9 +8,6 @@ return {
 	-- trigger
 	-- can be a combination:
 	on = {
-		devices = {
-			138
-		},
 		timer = {
 		    'at 00:00'
 		}
@@ -33,17 +30,13 @@ return {
 		-- example
 		
 		local switchSleepMode = domoticz.devices(138)
-		
-		if (device == nil) then
-			domoticz.log('Reset PIR disabled to false at midnight.')
-			
-			domoticz.globalData.pirDisabled = false	    -- switch off pirDisabled
-			domoticz.devices(158).switchOn()			-- switch ON VIRT07 (PIR)
-		end
-		
-        if (device == nil and switchSleepMode.state == 'Off') then 
+				
+		domoticz.log('Reset PIR disabled to false at midnight.')			
+		domoticz.devices(domoticz.helpers.STATIC_VIRT07).switchOn()			-- switch ON VIRT07 (PIR)
+
+        if (switchSleepMode.state == 'Off') then 
 			switchSleepMode.switchOn()   
-            domoticz.log('Automatically switched to sleep mode at 00:00.')
+       	    domoticz.log('Automatically switched to sleep mode at 00:00.')
 		end
 	end
 }

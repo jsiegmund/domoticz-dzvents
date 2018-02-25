@@ -25,7 +25,8 @@ return {
         STATIC_DIM06 = 168,         -- Keuken
         STATIC_DIM07 = 234,         -- Keuken (eiland)
         STATIC_DIM08 = 219,         -- Hal beneden
-        STATIC_DIM09 = 283
+        STATIC_DIM09 = 283,         -- Slaapkamer
+        STATIC_VIRT07 = 158        -- PIR enabled        
     },
     data = {
         pirDisabled = { initial = false },
