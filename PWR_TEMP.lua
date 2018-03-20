@@ -11,7 +11,7 @@ return {
 		devices = {
 			-- scripts is executed if the device that was updated matches with one of these triggers
 			115,        -- PWR01
-			328         -- PWR02
+			251         -- PWR03
 		}
 	},
 

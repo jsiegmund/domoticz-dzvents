@@ -37,13 +37,11 @@ return {
 		-- when at night and movie is playing; switch on movie mode
 		if (nightModeSwitch.state == 'On' and device.state == 'Video') then
 		    domoticz.scenes(9).switchOn()		-- start movie scene
-		    domoticz.devices(158).switchOff()	-- enable PIR switch
 		    domoticz.log('Switched to movie mode because its night time and theres a movie playing')
 		end
 		
 		if (domoticz.scenes(9).state == 'On' and (device.state == 'Paused' or device.state == 'Stopped')) then
 		    domoticz.scenes(1).switchOn()       -- normal lights scene
-		    domoticz.devices(158).switchOn()	-- disable PIR switch
 		    domoticz.log('Switched to normal lights when the movie when on Pause')
 		end
 		 
