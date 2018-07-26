@@ -33,16 +33,34 @@ return {
 		domoticz.log('handling kodi event' .. device.state )
 		
 		local nightModeSwitch = domoticz.devices(139)
+
+		if (nightModeSwitch.state ~= 'On') then
+			domoticz.log('Exiting KODI_EVENTS script because the system is NOT in night mode.')
+			return
+		end
+
+		local movieLightsScene = domoticz.scenes(9)
+		local normalLightsScene = domoticz.scenes(22)
+		local pauseLightsScene = domoticz.scenes(23)
 		
-		-- when at night and movie is playing; switch on movie mode
-		if (nightModeSwitch.state == 'On' and device.state == 'Video') then
-		    domoticz.scenes(9).switchOn()		-- start movie scene
+		-- when movie is playing; switch on movie mode
+		if (device.state == 'Video') then
+		    movieLightsScene.switchOn()		-- start movie scene
 		    domoticz.log('Switched to movie mode because its night time and theres a movie playing')
 		end
-		
-		if (domoticz.scenes(9).state == 'On' and (device.state == 'Paused' or device.state == 'Stopped')) then
-		    domoticz.scenes(1).switchOn()       -- normal lights scene
-		    domoticz.log('Switched to normal lights when the movie when on Pause')
+
+		-- when movie scene is active and the movie is paused of stopped; switch scenes
+		if (movieLightsScene.state == 'On') then		
+			if (device.state == 'Paused') then
+				movieLightsScene.switchOff()
+				pauseLightsScene.switchOn()
+				domoticz.log('Switched to normal lights when the movie when on Pause')
+			end
+			if (device.state == 'Stopped') then
+				movieLightsScene.switchOff()
+			    normalLightsScene.switchOn()
+				domoticz.log('Switched to normal lights when the movie is Stopped')
+			end
 		end
 		 
 	end

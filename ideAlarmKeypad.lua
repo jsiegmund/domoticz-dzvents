@@ -10,8 +10,7 @@ return {
 	on = {
 		devices = {
 			-- scripts is executed if the device that was updated matches with one of these triggers
-			359,        -- PWR01
-			368         -- PWR02
+			401		-- Keypad status
 		}
 	},
 
@@ -30,14 +29,14 @@ return {
 		The device object is the device that was triggered due to the device in the 'on' section above.
 		]] --
 		-- example
-		
-		domoticz.log('Power switch ' .. device.name .. ' toggled to state:' .. device.state)
 
-		local delayMins = 180
+		local armAway = 156
+		local armHome = 155
 		
 		if (device.state == 'On') then
-			device.switchOff().afterMin(delayMins)
-			domoticz.log('Power switch ' .. device.name .. ' has been set to switch off after ' .. tostring(delayMins) .. ' minutes.')
+			domoticz.log('Detected keypad change, toggling the alarm state')
+			domoticz.devices(armAway).toggleSwitch()
 		end
+
 	end
 }

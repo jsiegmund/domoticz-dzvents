@@ -29,7 +29,13 @@ return {
 	},
 	data = data,
 	execute = function(domoticz, device, triggerInfo)
-		domoticz.log('Triggered by '..((device) and 'device: '..device.name..', device state is: '..device.state or 'Domoticz Security'), domoticz.LOG_DEBUG)
+		if device == nil then
+			domoticz.log('Triggered with device = nil, not executing.')
+		else
+			--domoticz.log('Triggered by '..((device) and 'device: '..device.name..', device state is: '..device.state or 'Domoticz Security'), domoticz.LOG_DEBUG)
+		end
+
+		domoticz.log('Alarm triggered. Trigger type = ' .. triggerInfo.type)
 		alarm.execute(domoticz, device, triggerInfo)
 	end
 }

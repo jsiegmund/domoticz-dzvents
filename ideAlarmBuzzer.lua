@@ -10,8 +10,7 @@ return {
 	on = {
 		devices = {
 			-- scripts is executed if the device that was updated matches with one of these triggers
-			359,        -- PWR01
-			368         -- PWR02
+			154
 		}
 	},
 
@@ -30,14 +29,17 @@ return {
 		The device object is the device that was triggered due to the device in the 'on' section above.
 		]] --
 		-- example
-		
-		domoticz.log('Power switch ' .. device.name .. ' toggled to state:' .. device.state)
 
-		local delayMins = 180
-		
-		if (device.state == 'On') then
-			device.switchOff().afterMin(delayMins)
-			domoticz.log('Power switch ' .. device.name .. ' has been set to switch off after ' .. tostring(delayMins) .. ' minutes.')
+		domoticz.log('Z1 status triggered: ' .. device.text)
+
+		local zoneText = device.text
+
+		if zoneText == 'Arming' or zoneText == 'Tripped' then
+			domoticz.devices(406).switchOn()
+		end
+
+		if zoneText == 'Normal' then
+			domoticz.devices(406).switchOff()
 		end
 	end
 }
